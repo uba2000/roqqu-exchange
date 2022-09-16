@@ -1,6 +1,11 @@
 @font-face {
-  font-family: "Avenir";
+  font-family: "AvenirBook";
   src: url(/public/fonts/avenir/AvenirLTStd-Book.otf);
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url(/public/fonts/avenir/AvenirLTStd-Black.otf);
 }
 
 @font-face {
@@ -24,9 +29,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply bg-background text-white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.btn {
+  @apply border-black 
+  inline-block rounded-lg cursor-pointer 
+  text-center bg-black font-normal text-white 
+  font-avenirBook text-base 
+  border border-solid 
+  leading-[22px] tracking-[-0.4px] !important;
+  -webkit-transition: 300ms ease all;
+  -o-transition: 300ms ease all;
+  transition: 300ms ease all;
 }
