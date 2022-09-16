@@ -273,7 +273,7 @@ const AssetBox = ({
   return (
     <div className="bg-background-1 px-[18px] py-6 basis-[371px] rounded-[5px] flex justify-between">
       <div className="flex space-x-3">
-        <img src={icon} alt={name} />
+        <img src={icon} alt={name} className="w-[54px] h-[54px]" />
         <div className="flex flex-col">
           <span className="">{name}</span>
           <span className="font-avenirBook text-sm uppercase">{asset}</span>
