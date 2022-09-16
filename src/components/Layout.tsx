@@ -6,7 +6,7 @@ import ActiveLink from "./ActiveLink";
 
 const asideItems = [
   {
-    icon: ASSETS.icon.chart,
+    icon: ASSETS.icon.home,
     id: "home",
     link: "/",
   },

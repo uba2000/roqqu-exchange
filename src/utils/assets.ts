@@ -9,6 +9,7 @@ const ASSETS = {
     book: "/icons/book.svg",
     btc: "/icons/btc.svg",
     chart: "/icons/chart.svg",
+    home: "/icons/chart.svg",
     eth: "/icons/eth.svg",
     fire: "/icons/fire.svg",
     pulse: "/icons/pulse.svg",
