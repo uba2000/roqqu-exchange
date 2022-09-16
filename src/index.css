@@ -38,8 +38,12 @@ body {
   text-center bg-black font-normal text-white 
   font-avenirBook text-base 
   border border-solid 
-  leading-[22px] tracking-[-0.4px] !important;
+  leading-[22px] tracking-[-0.4px];
   -webkit-transition: 300ms ease all;
   -o-transition: 300ms ease all;
   transition: 300ms ease all;
+}
+
+.blue {
+  @apply py-[10px] px-6 bg-blue-1500;
 }

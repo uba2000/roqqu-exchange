@@ -82,8 +82,10 @@ const Layout = () => {
             ))}
           </ul>
         </aside>
-        <div className="flex-grow container">
-          <Outlet />
+        <div className="flex-grow overflow-y-auto h-[calc(100vh_-_100px)]">
+          <div className="container">
+            <Outlet />
+          </div>
         </div>
       </div>
     </main>
