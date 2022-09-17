@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: "AvenirRoman";
+  src: url(/public/fonts/avenir/AvenirLTStd-Roman.otf);
+}
+
+@font-face {
   font-family: "Avenir";
   src: url(/public/fonts/avenir/AvenirLTStd-Black.otf);
 }

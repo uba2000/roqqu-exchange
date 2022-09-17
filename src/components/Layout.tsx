@@ -13,7 +13,7 @@ const asideItems = [
   {
     icon: ASSETS.icon.chart,
     id: "chart",
-    link: "/chart",
+    link: "/pair",
   },
   {
     icon: ASSETS.icon.wallet,
@@ -55,13 +55,20 @@ const Layout = () => {
           <Link to="/" className="flex items-center">
             <img src={ASSETS.logo} alt="Roqqu" className="w-[92px] h-5" />
           </Link>
-          <div className="space-x-7 flex">
-            <img
-              src={ASSETS.icon.bell}
-              className="w-[25px]"
-              alt="notification"
-            />
-            <div className="bg-[#101E48] w-[52px] h-[52px] rounded-full grid place-content-center"></div>
+          <div className="space-x-[136px] flex">
+            <div className="space-x-[58px] flex items-center text-sm text-white-1100">
+              <Link to="/deposit">Deposit</Link>
+              <Link to="/sell">Sell Crypto</Link>
+              <Link to="/transfer">Transfer</Link>
+            </div>
+            <div className="space-x-7 flex">
+              <img
+                src={ASSETS.icon.bell}
+                className="w-[25px]"
+                alt="notification"
+              />
+              <div className="bg-[#101E48] w-[52px] h-[52px] rounded-full grid place-content-center"></div>
+            </div>
           </div>
         </div>
       </nav>
