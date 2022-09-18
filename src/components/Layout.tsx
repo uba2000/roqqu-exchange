@@ -74,7 +74,7 @@ const Layout = () => {
         </div>
       </nav>
       <div className="flex relative">
-        <aside className="basis-[89px] max-w-[89px] peer group hover:basis-[248px] hover:max-w-[248px] hover:absolute z-20 hover:left-0 hover:bottom-0 py-[35px] pr-[22px] pl-[17px] bg-background-1 h-[calc(100vh_-_100px)]">
+        <aside className="basis-[89px] max-w-[89px] peer group hover:basis-[248px] hover:max-w-[248px] absolute z-20 left-0 bottom-0 py-[35px] pr-[22px] pl-[17px] bg-background-1 h-[calc(100vh_-_100px)]">
           <ul className="flex flex-col space-y-2">
             {asideItems.map((item) => (
               <Fragment key={item.id}>
@@ -93,10 +93,8 @@ const Layout = () => {
             ))}
           </ul>
         </aside>
-        <div className="relative z-10 flex-grow peer-hover:ml-[89px] overflow-y-auto h-[calc(100vh_-_100px)]">
-          <div className="container">
-            <Outlet />
-          </div>
+        <div className="relative z-10 flex-grow ml-[89px] overflow-y-auto scrollbar-hide h-[calc(100vh_-_100px)]">
+          <Outlet />
         </div>
       </div>
     </main>

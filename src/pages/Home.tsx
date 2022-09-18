@@ -9,73 +9,26 @@ const AssetsTab = ["Core Assets", "Top Gainers", "Top Losers", "New"];
 
 const Home = () => {
   return (
-    <div className="py-8">
-      <div className="grid gap-x-[31px] grid-cols-[auto_350px]">
-        <div className="space-y-[53px]">
-          <div className="px-[38px] py-10 rounded-2xl bg-gradient-to-r from-blue-1600 to-purple-1600 flex">
-            <div className="flex-grow space-y-[34px]">
-              <span className="uppercase text-sm font-avenirBook">
-                January 2, 2022
-              </span>
-              <div className="space-y-4">
-                <h3 className="text-landingText font-gilroyBold">
-                  Welcome to Roqqu’s Decentralized Exchange
-                </h3>
-                <p className="text-subLandingText font-avenirBook text-[#E8E9EBCC]">
-                  With an easy-to-use interface, we provide industry-leading
-                  security and deep liquidity
-                </p>
-                <Button className={"h-[60px] w-[229px] relative"}>
-                  Learn More
-                  <span className="absolute top-[calc(50%_-_10px)] right-[36px]">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                </Button>
-              </div>
-            </div>
-            <div className="grid place-content-center">
-              <img src={Assets.img.decor1} alt="1" />
-            </div>
-          </div>
-          <Tab.Group>
-            <div className="space-y-[22px]">
-              <Tab.List className="text-sm flex justify-between border-b border-[#91A0CE1A] border-solid">
-                <div className="flex space-x-1 text-primary-1300">
-                  {AssetsTab.map((item, idx) => (
-                    <Tab as={Fragment} key={idx}>
-                      {({ selected }) => (
-                        <div>
-                          <TabContent title={item} active={selected} />
-                        </div>
-                      )}
-                    </Tab>
-                  ))}
-                  {/* <Tab as={Fragment}>
-                    {({ selected }) => (
-                      <div>
-                        <TabContent title="Top Gainers" active={selected} />
-                      </div>
-                    )}
-                  </Tab>
-                  <TabContent title="Top Gainers" />
-                  <TabContent title="Top Losers" />
-                  <TabContent title="New" /> */}
-                </div>
-                <div className="text-white-1100">
-                  <div className="flex relative space-x-4 py-[18px] px-3 cursor-pointer">
-                    <span>Market Cap</span>
-                    <span>
+    <div className="container">
+      <div className="py-8">
+        <div className="grid gap-x-[31px] grid-cols-[auto_350px]">
+          <div className="space-y-[53px]">
+            <div className="px-[38px] py-10 rounded-2xl bg-gradient-to-r from-blue-1600 to-purple-1600 flex">
+              <div className="flex-grow space-y-[34px]">
+                <span className="uppercase text-sm font-avenirBook">
+                  January 2, 2022
+                </span>
+                <div className="space-y-4">
+                  <h3 className="text-landingText font-gilroyBold">
+                    Welcome to Roqqu’s Decentralized Exchange
+                  </h3>
+                  <p className="text-subLandingText font-avenirBook text-[#E8E9EBCC]">
+                    With an easy-to-use interface, we provide industry-leading
+                    security and deep liquidity
+                  </p>
+                  <Button className={"h-[60px] w-[229px] relative"}>
+                    Learn More
+                    <span className="absolute top-[calc(50%_-_10px)] right-[36px]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -84,145 +37,196 @@ const Home = () => {
                       >
                         <path
                           fillRule="evenodd"
-                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
                           clipRule="evenodd"
                         />
                       </svg>
                     </span>
-                  </div>
+                  </Button>
                 </div>
-              </Tab.List>
-              <Tab.Panels>
-                <AssetBoxContainer>
-                  <AssetBox
-                    asset="btc"
-                    icon={<Assets.Icon.Btc />}
-                    name="Bitcoin"
-                  />
-
-                  <AssetBox
-                    asset="usdt"
-                    icon={<Assets.Icon.Usdt />}
-                    name="Tether"
-                  />
-                  <AssetBox
-                    asset="eth"
-                    icon={<Assets.Icon.Eth />}
-                    name="Ethereum"
-                    status="l"
-                  />
-                  <AssetBox
-                    asset="bnb"
-                    icon={<Assets.Icon.Bnb />}
-                    name="Binance Coin"
-                  />
-                </AssetBoxContainer>
-                <AssetBoxContainer>
-                  <AssetBox
-                    asset="btc"
-                    icon={<Assets.Icon.Btc />}
-                    name="Bitcoin"
-                  />
-                  <AssetBox
-                    asset="usdt"
-                    icon={<Assets.Icon.Usdt />}
-                    name="Tether"
-                  />
-                  <AssetBox
-                    asset="eth"
-                    icon={<Assets.Icon.Eth />}
-                    name="Ethereum"
-                  />
-                  <AssetBox
-                    asset="bnb"
-                    icon={<Assets.Icon.Bnb />}
-                    name="Binance Coin"
-                  />
-                </AssetBoxContainer>
-                <AssetBoxContainer>
-                  <AssetBox
-                    asset="btc"
-                    icon={<Assets.Icon.Btc />}
-                    name="Bitcoin"
-                    status="l"
-                  />
-                  <AssetBox
-                    asset="usdt"
-                    icon={<Assets.Icon.Usdt />}
-                    name="Tether"
-                    status="l"
-                  />
-                  <AssetBox
-                    asset="eth"
-                    icon={<Assets.Icon.Eth />}
-                    name="Ethereum"
-                    status="l"
-                  />
-                  <AssetBox
-                    asset="bnb"
-                    icon={<Assets.Icon.Bnb />}
-                    name="Binance Coin"
-                    status="l"
-                  />
-                </AssetBoxContainer>
-                <AssetBoxContainer>
-                  <AssetBox
-                    asset="bnb"
-                    icon={<Assets.Icon.Bnb />}
-                    name="Binance Coin"
-                  />
-                </AssetBoxContainer>
-              </Tab.Panels>
-            </div>
-          </Tab.Group>
-        </div>
-        <div className="bg-background-1 rounded-[5px] py-[14px] space-y-12">
-          <div className="px-[10px]">
-            <div className="space-y-[27px] bg-background-2 rounded-lg px-6 py-[34px]">
-              <span className="uppercase text-sm font-avenirBook">
-                Wallet Balance
-              </span>
-              <div className="space-y-[30px] grid place-content-center">
-                <div className="space-y-[14px] flex items-center flex-col">
-                  <div className="uppercase font-avenirBook text-sm bg-gold w-[58px] h-[30px] rounded-[18px] text-white grid place-content-center">
-                    btc
-                  </div>
-                  <div className="space-y-[7px] flex flex-col text-center">
-                    <span className="text-[30px]">0.2993029</span>
-                    <span className="text-positive font-avenir">3,700 USD</span>
-                  </div>
-                </div>
-                <Button variant={"blue"} className="w-[120px] mx-auto">
-                  Withdraw
-                </Button>
+              </div>
+              <div className="grid place-content-center">
+                <img src={Assets.img.decor1} alt="decor1" />
               </div>
             </div>
+            <Tab.Group>
+              <div className="space-y-[22px]">
+                <Tab.List className="text-sm flex justify-between border-b border-[#91A0CE1A] border-solid">
+                  <div className="flex space-x-1 text-primary-1300">
+                    {AssetsTab.map((item, idx) => (
+                      <Tab as={Fragment} key={idx}>
+                        {({ selected }) => (
+                          <div>
+                            <TabContent title={item} active={selected} />
+                          </div>
+                        )}
+                      </Tab>
+                    ))}
+                    {/* <Tab as={Fragment}>
+                      {({ selected }) => (
+                        <div>
+                          <TabContent title="Top Gainers" active={selected} />
+                        </div>
+                      )}
+                    </Tab>
+                    <TabContent title="Top Gainers" />
+                    <TabContent title="Top Losers" />
+                    <TabContent title="New" /> */}
+                  </div>
+                  <div className="text-white-1100">
+                    <div className="flex relative space-x-4 py-[18px] px-3 cursor-pointer">
+                      <span>Market Cap</span>
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </Tab.List>
+                <Tab.Panels>
+                  <AssetBoxContainer>
+                    <AssetBox
+                      asset="btc"
+                      icon={<Assets.Icon.Btc />}
+                      name="Bitcoin"
+                    />
+
+                    <AssetBox
+                      asset="usdt"
+                      icon={<Assets.Icon.Usdt />}
+                      name="Tether"
+                    />
+                    <AssetBox
+                      asset="eth"
+                      icon={<Assets.Icon.Eth />}
+                      name="Ethereum"
+                      status="l"
+                    />
+                    <AssetBox
+                      asset="bnb"
+                      icon={<Assets.Icon.Bnb />}
+                      name="Binance Coin"
+                    />
+                  </AssetBoxContainer>
+                  <AssetBoxContainer>
+                    <AssetBox
+                      asset="btc"
+                      icon={<Assets.Icon.Btc />}
+                      name="Bitcoin"
+                    />
+                    <AssetBox
+                      asset="usdt"
+                      icon={<Assets.Icon.Usdt />}
+                      name="Tether"
+                    />
+                    <AssetBox
+                      asset="eth"
+                      icon={<Assets.Icon.Eth />}
+                      name="Ethereum"
+                    />
+                    <AssetBox
+                      asset="bnb"
+                      icon={<Assets.Icon.Bnb />}
+                      name="Binance Coin"
+                    />
+                  </AssetBoxContainer>
+                  <AssetBoxContainer>
+                    <AssetBox
+                      asset="btc"
+                      icon={<Assets.Icon.Btc />}
+                      name="Bitcoin"
+                      status="l"
+                    />
+                    <AssetBox
+                      asset="usdt"
+                      icon={<Assets.Icon.Usdt />}
+                      name="Tether"
+                      status="l"
+                    />
+                    <AssetBox
+                      asset="eth"
+                      icon={<Assets.Icon.Eth />}
+                      name="Ethereum"
+                      status="l"
+                    />
+                    <AssetBox
+                      asset="bnb"
+                      icon={<Assets.Icon.Bnb />}
+                      name="Binance Coin"
+                      status="l"
+                    />
+                  </AssetBoxContainer>
+                  <AssetBoxContainer>
+                    <AssetBox
+                      asset="bnb"
+                      icon={<Assets.Icon.Bnb />}
+                      name="Binance Coin"
+                    />
+                  </AssetBoxContainer>
+                </Tab.Panels>
+              </div>
+            </Tab.Group>
           </div>
-          <div className="px-[18px] space-y-5">
-            <h4 className="text-[18px] font-gilroyBold">Latest Activities</h4>
-            <div className="space-y-[14px]">
-              <ActivityBox desc="Withdrew USDT" type="withdraw" />
-              <ActivityBox desc="Exchanged BTC" type="exchange" />
-              <ActivityBox desc="Deposit ETH" type="deposit" />
+          <div className="bg-background-1 rounded-[5px] py-[14px] space-y-12">
+            <div className="px-[10px]">
+              <div className="space-y-[27px] bg-background-2 rounded-lg px-6 py-[34px]">
+                <span className="uppercase text-sm font-avenirBook">
+                  Wallet Balance
+                </span>
+                <div className="space-y-[30px] grid place-content-center">
+                  <div className="space-y-[14px] flex items-center flex-col">
+                    <div className="uppercase font-avenirBook text-sm bg-gold w-[58px] h-[30px] rounded-[18px] text-white grid place-content-center">
+                      btc
+                    </div>
+                    <div className="space-y-[7px] flex flex-col text-center">
+                      <span className="text-[30px]">0.2993029</span>
+                      <span className="text-positive font-avenir">
+                        3,700 USD
+                      </span>
+                    </div>
+                  </div>
+                  <Button variant={"blue"} className="w-[120px] mx-auto">
+                    Withdraw
+                  </Button>
+                </div>
+              </div>
             </div>
-            <Link
-              to="/"
-              className="justify-center font-avenirBook font-medium text-sm flex space-x-4"
-            >
-              <span>View All Activity</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-5 h-5"
+            <div className="px-[18px] space-y-5">
+              <h4 className="text-[18px] font-gilroyBold">Latest Activities</h4>
+              <div className="space-y-[14px]">
+                <ActivityBox desc="Withdrew USDT" type="withdraw" />
+                <ActivityBox desc="Exchanged BTC" type="exchange" />
+                <ActivityBox desc="Deposit ETH" type="deposit" />
+              </div>
+              <Link
+                to="/"
+                className="justify-center font-avenirBook font-medium text-sm flex space-x-4"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </Link>
+                <span>View All Activity</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -5,47 +5,49 @@ import Assets from "../utils/assets";
 
 const Pair = () => {
   return (
-    <div className="py-[18px] space-y-[27px]">
-      <div className="bg-background-3 text-right min-h-[98px] rounded-lg grid grid-cols-6 divide-x-[1px] divide-divider">
-        <div className="text-left px-2 py-6 grid place-content-center space-x-[14px]">
-          <div className="space-x-2 flex cursor-pointer">
-            {/* <img src={} alt="token" className="w-[33px] h-[33px]" /> */}
-            <Assets.Icon.Btc className="w-[33px] h-[33px]" />
-            <div className="flex flex-col">
-              <span className="flex space-x-4">
-                <span className="text-white-1100 font-bold">BTC /USDT</span>
-                <span className="">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+    <>
+      <div className="pt-[18px] container top-0 z-50 sticky">
+        <div className="bg-background-3 text-right min-h-[98px] rounded-lg grid grid-cols-6 divide-x-[1px] divide-divider">
+          <div className="text-left px-2 py-6 grid place-content-center space-x-[14px]">
+            <div className="space-x-2 flex cursor-pointer">
+              {/* <img src={} alt="token" className="w-[33px] h-[33px]" /> */}
+              <Assets.Icon.Btc className="w-[33px] h-[33px]" />
+              <div className="flex flex-col">
+                <span className="flex space-x-4">
+                  <span className="text-white-1100 font-bold">BTC /USDT</span>
+                  <span className="">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                 </span>
-              </span>
-              <span className="text-white-t-1200 text-xs">Bitcoin</span>
+                <span className="text-white-t-1200 text-xs">Bitcoin</span>
+              </div>
             </div>
           </div>
-        </div>
-        <TokenHeaderInfoContent title="Last Price" status="positive" />
-        <TokenHeaderInfoContent title="High" />
-        <TokenHeaderInfoContent title="Low" />
-        <TokenHeaderInfoContent title="Volume" />
-        <div className="text-center">
-          <TokenHeaderInfoContent
-            title="24 Change"
-            status="positive"
-            amount="+3.04%"
-          />
+          <TokenHeaderInfoContent title="Last Price" status="positive" />
+          <TokenHeaderInfoContent title="High" />
+          <TokenHeaderInfoContent title="Low" />
+          <TokenHeaderInfoContent title="Volume" />
+          <div className="text-center">
+            <TokenHeaderInfoContent
+              title="24 Change"
+              status="positive"
+              amount="+3.04%"
+            />
+          </div>
         </div>
       </div>
-      <div className="space-y-3">
+      <div className="container mt-[27px] mb-4 space-y-3">
         <div className="grid gap-x-[13px] grid-cols-[auto_339px]">
           <div>
             <div className="bg-background-1 py-[13px] space-y-4 rounded-t-[10px]">
@@ -157,8 +159,70 @@ const Pair = () => {
             </div>
           </div>
         </div>
+        <div className="grid gap-x-[13px] grid-cols-[auto_343px]">
+          <div>
+            <div className="bg-background-1 py-[13px] space-y-4 rounded-[10px]">
+              <div className="space-y-4">
+                <div className="pl-[30px] flex justify-between items-end pr-4">
+                  <h5 className="text-white-1100">Market Trades</h5>
+                </div>
+                <div className="pl-2 pr-[13px]">
+                  <div className="bg-background-2 rounded-[5px] pt-[13px] px-6">
+                    <div className="mb-5 px-2 pt-4 flex space-x-1 items-center text-xs uppercase text-white-t-1200">
+                      <div className="flex-1">Time</div>
+                      <div className="flex-1">PRICE(USDT)</div>
+                      <div className="flex-1">AMOUNT(BTC)</div>
+                      <div className="flex-1">TOTAL (USDT)</div>
+                    </div>
+                    <div className="h-[300px] overflow-y-auto scrollbar-hide">
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                      <TradesItem type="p" />
+                      <TradesItem />
+                      <TradesItem type="p" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-background-1 pb-2 pt-[26px] space-y-5 rounded-[5px]">
+              <div className="px-[22px]">
+                <h5 className="text-white-1100">Place Order</h5>
+              </div>
+              <div className="px-2 pb-4">
+                <div className="bg-background-2 rounded-[5px] min-h-[200px] grid place-content-center text-center">
+                  <span className="font-avenirBook">
+                    <span className="font-avenir">Sign In</span> or{" "}
+                    <span className="font-avenir">Create Account</span>
+                    <br />
+                    to Continue
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -187,13 +251,13 @@ const TokenHeaderInfoContent = ({
   );
 };
 
-type OrderItemType = {
+interface IOrderItemType {
   price?: string;
   amount?: string;
   total?: string;
   progress?: number;
   type?: "p" | "n";
-};
+}
 
 const OrderItem = ({
   price = "128299.304781",
@@ -201,7 +265,7 @@ const OrderItem = ({
   total = "5.304781",
   progress = 31,
   type = "n",
-}: OrderItemType) => {
+}: IOrderItemType) => {
   return (
     <div className="relative px-2 h-6 flex items-center overflow-x-hidden">
       <div className="flex w-full text-xs space-x-1">
@@ -229,6 +293,35 @@ const ChartOptions = ({ children }: ChartOptionsType) => {
   return (
     <div className="cursor-pointer w-[61px] h-[42px] rounded-[5px] place-content-center grid bg-[#21293E41]">
       <span className="text-xs text-white-1200">{children}</span>
+    </div>
+  );
+};
+
+interface ITradesItemType extends IOrderItemType {
+  time?: string;
+}
+
+const TradesItem = ({
+  price = "128299",
+  amount = "18372.99999",
+  total = "18372.99999",
+  progress = 31,
+  type = "n",
+  time = "18:02:18",
+}: ITradesItemType) => {
+  return (
+    <div className="relative px-2 h-6 flex items-center overflow-x-hidden">
+      <div className="flex w-full text-xs space-x-1">
+        <div className="text-inherit flex-1">{time}</div>
+        <div
+          className={`text-${type === "n" ? "negative" : "positive"} flex-1`}
+        >
+          {type === "n" ? "317" : "47817"}
+          <span className="text-white-t-1200">.70</span>
+        </div>
+        <div className="text-white flex-1">{amount}</div>
+        <div className="text-white flex-1">{total}</div>
+      </div>
     </div>
   );
 };
