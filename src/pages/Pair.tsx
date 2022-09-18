@@ -1,6 +1,6 @@
 import React from "react";
-// import CandleStickChartWithAnnotation from "../components/Chart";
 
+import Chart from "../components/Chart";
 import Assets from "../utils/assets";
 
 const Pair = () => {
@@ -117,7 +117,7 @@ const Pair = () => {
               </div>
               <div className="px-[6px]">
                 {/* Chart */}
-                {/* <CandleStickChartWithAnnotation /> */}
+                <Chart />
               </div>
             </div>
           </div>
