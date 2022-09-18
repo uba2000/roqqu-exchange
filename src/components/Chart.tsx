@@ -297,6 +297,7 @@ class Chart extends Component<{}, IState> {
           type: "candlestick",
           toolbar: {
             show: false,
+            autoSelected: "pan",
           },
         },
         title: {
