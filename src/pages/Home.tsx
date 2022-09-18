@@ -1,8 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
+import { Tab } from "@headlessui/react";
 
 import Assets from "../utils/assets";
+
+const AssetsTab = ["Core Assets", "Top Gainers", "Top Losers", "New"];
 
 const Home = () => {
   return (
@@ -45,53 +48,133 @@ const Home = () => {
               <img src={Assets.img.decor1} alt="1" />
             </div>
           </div>
-          <div className="space-y-[22px]">
-            <div className="text-sm flex justify-between border-b border-[#91A0CE1A] border-solid">
-              <div className="flex space-x-1 text-primary-1300">
-                <TabContent title="Core Assets" active />
-                <TabContent title="Top Gainers" />
-                <TabContent title="Top Losers" />
-                <TabContent title="New" />
-              </div>
-              <div className="text-white-1100">
-                <div className="flex relative space-x-4 py-[18px] px-3 cursor-pointer">
-                  <span>Market Cap</span>
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </span>
+          <Tab.Group>
+            <div className="space-y-[22px]">
+              <Tab.List className="text-sm flex justify-between border-b border-[#91A0CE1A] border-solid">
+                <div className="flex space-x-1 text-primary-1300">
+                  {AssetsTab.map((item, idx) => (
+                    <Tab as={Fragment} key={idx}>
+                      {({ selected }) => (
+                        <div>
+                          <TabContent title={item} active={selected} />
+                        </div>
+                      )}
+                    </Tab>
+                  ))}
+                  {/* <Tab as={Fragment}>
+                    {({ selected }) => (
+                      <div>
+                        <TabContent title="Top Gainers" active={selected} />
+                      </div>
+                    )}
+                  </Tab>
+                  <TabContent title="Top Gainers" />
+                  <TabContent title="Top Losers" />
+                  <TabContent title="New" /> */}
                 </div>
-              </div>
+                <div className="text-white-1100">
+                  <div className="flex relative space-x-4 py-[18px] px-3 cursor-pointer">
+                    <span>Market Cap</span>
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </Tab.List>
+              <Tab.Panels>
+                <AssetBoxContainer>
+                  <AssetBox
+                    asset="btc"
+                    icon={<Assets.Icon.Btc />}
+                    name="Bitcoin"
+                  />
+
+                  <AssetBox
+                    asset="usdt"
+                    icon={<Assets.Icon.Usdt />}
+                    name="Tether"
+                  />
+                  <AssetBox
+                    asset="eth"
+                    icon={<Assets.Icon.Eth />}
+                    name="Ethereum"
+                    status="l"
+                  />
+                  <AssetBox
+                    asset="bnb"
+                    icon={<Assets.Icon.Bnb />}
+                    name="Binance Coin"
+                  />
+                </AssetBoxContainer>
+                <AssetBoxContainer>
+                  <AssetBox
+                    asset="btc"
+                    icon={<Assets.Icon.Btc />}
+                    name="Bitcoin"
+                  />
+                  <AssetBox
+                    asset="usdt"
+                    icon={<Assets.Icon.Usdt />}
+                    name="Tether"
+                  />
+                  <AssetBox
+                    asset="eth"
+                    icon={<Assets.Icon.Eth />}
+                    name="Ethereum"
+                  />
+                  <AssetBox
+                    asset="bnb"
+                    icon={<Assets.Icon.Bnb />}
+                    name="Binance Coin"
+                  />
+                </AssetBoxContainer>
+                <AssetBoxContainer>
+                  <AssetBox
+                    asset="btc"
+                    icon={<Assets.Icon.Btc />}
+                    name="Bitcoin"
+                    status="l"
+                  />
+                  <AssetBox
+                    asset="usdt"
+                    icon={<Assets.Icon.Usdt />}
+                    name="Tether"
+                    status="l"
+                  />
+                  <AssetBox
+                    asset="eth"
+                    icon={<Assets.Icon.Eth />}
+                    name="Ethereum"
+                    status="l"
+                  />
+                  <AssetBox
+                    asset="bnb"
+                    icon={<Assets.Icon.Bnb />}
+                    name="Binance Coin"
+                    status="l"
+                  />
+                </AssetBoxContainer>
+                <AssetBoxContainer>
+                  <AssetBox
+                    asset="bnb"
+                    icon={<Assets.Icon.Bnb />}
+                    name="Binance Coin"
+                  />
+                </AssetBoxContainer>
+              </Tab.Panels>
             </div>
-            <div className="grid grid-cols-[371px_371px] gap-x-[53px] gap-y-[26px]">
-              <AssetBox asset="btc" icon={<Assets.Icon.Btc />} name="Bitcoin" />
-              <AssetBox
-                asset="usdt"
-                icon={<Assets.Icon.Usdt />}
-                name="Tether"
-              />
-              <AssetBox
-                asset="eth"
-                icon={<Assets.Icon.Eth />}
-                name="Ethereum"
-              />
-              <AssetBox
-                asset="bnb"
-                icon={<Assets.Icon.Bnb />}
-                name="Binance Coin"
-              />
-            </div>
-          </div>
+          </Tab.Group>
         </div>
         <div className="bg-background-1 rounded-[5px] py-[14px] space-y-12">
           <div className="px-[10px]">
@@ -220,7 +303,7 @@ const ActivityBox = ({
     }
   };
   return (
-    <div className="bg-background-2 rounded-[5px] text-sm flex space-x-[45px] py-[18px] px-[17px]">
+    <div className="bg-background-2 rounded-[5px] text-sm flex justify-between py-[18px] px-[17px]">
       <div className="space-x-5 flex">
         <div className="h-[46px] w-[46px] grid place-content-center text-[#BFC6DE91] bg-[#4848483C] rounded-full">
           {dpActivityType()}
@@ -263,17 +346,27 @@ const TabContent = ({
   );
 };
 
+const AssetBoxContainer = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Tab.Panel className="grid grid-cols-[371px_371px] gap-x-[53px] gap-y-[26px]">
+      {children}
+    </Tab.Panel>
+  );
+};
+
 type AssetBoxType = {
   asset: string;
   icon: React.ReactNode;
   name: string;
   amount?: string;
   change?: string;
+  status?: "g" | "l";
 };
 
 const AssetBox = ({
   amount = "54372.94USD",
-  change = "+2.43%",
+  change = "2.43%",
+  status = "g",
   asset,
   icon,
   name,
@@ -289,7 +382,12 @@ const AssetBox = ({
       </div>
       <div className="flex flex-col space-y-1">
         <span className="">{amount}</span>
-        <span className="text-positive text-xs">{change}</span>
+        <span
+          className={`text-${status === "g" ? "positive" : "negative"} text-xs`}
+        >
+          {status === "g" ? "+" : "-"}
+          {change}
+        </span>
       </div>
     </div>
   );
