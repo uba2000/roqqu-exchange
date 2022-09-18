@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
 
-import ASSETS from "../utils/assets";
+import Assets from "../utils/assets";
 
 const Home = () => {
   return (
@@ -42,7 +42,7 @@ const Home = () => {
               </div>
             </div>
             <div className="grid place-content-center">
-              <img src={ASSETS.img.decor1} alt="1" />
+              <img src={Assets.img.decor1} alt="1" />
             </div>
           </div>
           <div className="space-y-[22px]">
@@ -74,12 +74,20 @@ const Home = () => {
               </div>
             </div>
             <div className="grid grid-cols-[371px_371px] gap-x-[53px] gap-y-[26px]">
-              <AssetBox asset="btc" icon={ASSETS.icon.btc} name="Bitcoin" />
-              <AssetBox asset="usdt" icon={ASSETS.icon.usdt} name="Tether" />
-              <AssetBox asset="eth" icon={ASSETS.icon.eth} name="Ethereum" />
+              <AssetBox asset="btc" icon={<Assets.Icon.Btc />} name="Bitcoin" />
+              <AssetBox
+                asset="usdt"
+                icon={<Assets.Icon.Usdt />}
+                name="Tether"
+              />
+              <AssetBox
+                asset="eth"
+                icon={<Assets.Icon.Eth />}
+                name="Ethereum"
+              />
               <AssetBox
                 asset="bnb"
-                icon={ASSETS.icon.bnb}
+                icon={<Assets.Icon.Bnb />}
                 name="Binance Coin"
               />
             </div>
@@ -257,7 +265,7 @@ const TabContent = ({
 
 type AssetBoxType = {
   asset: string;
-  icon: string;
+  icon: React.ReactNode;
   name: string;
   amount?: string;
   change?: string;
@@ -273,7 +281,7 @@ const AssetBox = ({
   return (
     <div className="bg-background-1 px-[18px] py-6 basis-[371px] rounded-[5px] flex justify-between">
       <div className="flex space-x-3">
-        <img src={icon} alt={name} className="w-[54px] h-[54px]" />
+        {icon}
         <div className="flex flex-col">
           <span className="">{name}</span>
           <span className="font-avenirBook text-sm uppercase">{asset}</span>

@@ -1,6 +1,7 @@
 import React from "react";
+// import CandleStickChartWithAnnotation from "../components/Chart";
 
-import ASSETS from "../utils/assets";
+import Assets from "../utils/assets";
 
 const Pair = () => {
   return (
@@ -8,11 +9,8 @@ const Pair = () => {
       <div className="bg-background-3 text-right min-h-[98px] rounded-lg grid grid-cols-6 divide-x-[1px] divide-divider">
         <div className="text-left px-2 py-6 grid place-content-center space-x-[14px]">
           <div className="space-x-2 flex cursor-pointer">
-            <img
-              src={ASSETS.icon.btc}
-              alt="token"
-              className="w-[33px] h-[33px]"
-            />
+            {/* <img src={} alt="token" className="w-[33px] h-[33px]" /> */}
+            <Assets.Icon.Btc className="w-[33px] h-[33px]" />
             <div className="flex flex-col">
               <span className="flex space-x-4">
                 <span className="text-white-1100 font-bold">BTC /USDT</span>
@@ -114,7 +112,10 @@ const Pair = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-[6px]"></div>
+              <div className="px-[6px]">
+                {/* Chart */}
+                {/* <CandleStickChartWithAnnotation /> */}
+              </div>
             </div>
           </div>
           <div>

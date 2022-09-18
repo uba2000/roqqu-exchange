@@ -1,49 +1,49 @@
 import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 
-import ASSETS from "../utils/assets";
+import Assets from "../utils/assets";
 import ActiveLink from "./ActiveLink";
 
 const asideItems = [
   {
-    icon: ASSETS.icon.home,
+    icon: Assets.Icon.Home,
     id: "home",
     link: "/",
   },
   {
-    icon: ASSETS.icon.chart,
-    id: "chart",
-    link: "/pair",
+    icon: Assets.Icon.Chart,
+    id: "exchange",
+    link: "/exchange",
   },
   {
-    icon: ASSETS.icon.wallet,
-    id: "wallet",
-    link: "/wallet",
+    icon: Assets.Icon.Wallet,
+    id: "wallets",
+    link: "/wallets",
   },
   {
-    icon: ASSETS.icon.book,
-    id: "book",
-    link: "/book",
+    icon: Assets.Icon.Book,
+    id: "prices",
+    link: "/prices",
   },
   {
-    icon: ASSETS.icon.pulse,
-    id: "pulse",
-    link: "/pulse",
+    icon: Assets.Icon.Pulse,
+    id: "activities",
+    link: "/activities",
   },
   {
-    icon: ASSETS.icon.fire,
-    id: "fire",
-    link: "/fire",
+    icon: Assets.Icon.Fire,
+    id: "promotions",
+    link: "/promotions",
   },
   {
-    icon: ASSETS.icon.settings,
+    icon: Assets.Icon.Settings,
     id: "settings",
     link: "/settings",
   },
   {
-    icon: ASSETS.icon.bell,
-    id: "bell",
-    link: "/bell",
+    icon: Assets.Icon.Bell,
+    id: "notifications",
+    link: "/notifications",
   },
 ];
 
@@ -53,7 +53,7 @@ const Layout = () => {
       <nav className="h-[100px] bg-background-1 flex justify-between items-center">
         <div className="container pl- flex justify-between">
           <Link to="/" className="flex items-center">
-            <img src={ASSETS.logo} alt="Roqqu" className="w-[92px] h-5" />
+            <img src={Assets.logo} alt="Roqqu" className="w-[92px] h-5" />
           </Link>
           <div className="space-x-[136px] flex">
             <div className="space-x-[58px] flex items-center text-sm text-white-1100">
@@ -62,37 +62,38 @@ const Layout = () => {
               <Link to="/transfer">Transfer</Link>
             </div>
             <div className="space-x-7 flex">
-              <div className="relative">
-                <img
-                  src={ASSETS.icon.bell}
-                  className="w-[25px]"
-                  alt="notification"
-                />
-                <div className="w-2 h-2 rounded-full bg-orange absolute right-0 top-0"></div>
+              <div className="place-content-center grid">
+                <div className="relative">
+                  <Assets.Icon.Bell />
+                  <div className="w-2 h-2 rounded-full bg-orange absolute -right-1 -top-1"></div>
+                </div>
               </div>
               <div className="bg-[#101E48] w-[52px] h-[52px] rounded-full grid place-content-center"></div>
             </div>
           </div>
         </div>
       </nav>
-      <div className="flex">
-        <aside className="basis-[89px] py-[35px] pr-[22px] pl-[17px] bg-background-1 h-[calc(100vh_-_100px)]">
+      <div className="flex relative">
+        <aside className="basis-[89px] max-w-[89px] peer group hover:basis-[248px] hover:max-w-[248px] hover:absolute hover:left-0 hover:bottom-0 py-[35px] pr-[22px] pl-[17px] bg-background-1 h-[calc(100vh_-_100px)]">
           <ul className="flex flex-col space-y-2">
             {asideItems.map((item) => (
               <Fragment key={item.id}>
                 <li>
                   <ActiveLink
                     href={item.link}
-                    className="h-[46px] grid place-content-center hover:bg-hover-background rounded-lg"
+                    className="py-[12.515px] px-[14.515px] space-x-[37px] flex items-center justify-start rounded-lg"
                   >
-                    <img src={item.icon} alt={item.id} />
+                    {<item.icon className="w-[20.97px] h-[20.97px]" />}
+                    <span className="group-hover:inline hidden capitalize text-sm">
+                      {item.id}
+                    </span>
                   </ActiveLink>
                 </li>
               </Fragment>
             ))}
           </ul>
         </aside>
-        <div className="flex-grow overflow-y-auto h-[calc(100vh_-_100px)]">
+        <div className="flex-grow peer-hover:ml-[89px] overflow-y-auto h-[calc(100vh_-_100px)]">
           <div className="container">
             <Outlet />
           </div>

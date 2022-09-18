@@ -15,8 +15,10 @@ const ActiveLink = ({ href, children, className = "" }: ActiveLinkProps) => {
     <Link
       to={href}
       className={`${
-        router.pathname === href ? "bg-hover-background" : ""
-      } ${className}`}
+        router.pathname === href
+          ? "bg-hover-background text-[#FFFFFFD8]"
+          : "text-primary-1300"
+      } hover:bg-hover-background hover:text-[#FFFFFFD8] ${className}`}
     >
       {children}
     </Link>
