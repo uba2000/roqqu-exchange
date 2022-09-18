@@ -62,11 +62,14 @@ const Pair = () => {
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="flex space-x-[6px]">
-                    <ChartOptions>4h</ChartOptions>
-                    <ChartOptions>C</ChartOptions>
-                    <ChartOptions>S</ChartOptions>
-                    <ChartOptions>CH</ChartOptions>
+                  <div className="space-x-5">
+                    <div className="flex space-x-[6px]">
+                      <ChartOptions>4h</ChartOptions>
+                      <ChartOptions>C</ChartOptions>
+                      <ChartOptions>S</ChartOptions>
+                      <ChartOptions>CH</ChartOptions>
+                    </div>
+                    <div className="flex space-x-3"></div>
                   </div>
                   <div className="flex space-x-[6px]">
                     <ChartOptions>Save</ChartOptions>
