@@ -27,12 +27,16 @@ module.exports = {
         "purple-1600": "#9F19D1",
         "hover-background": "rgba(140,164,237,0.07)",
         positive: "#1AC9A0",
+        "positive-t": "#13A5831C",
+        negative: "#FF8686",
+        "negative-t": "#F07A642F",
         gold: "#D17300",
         "white-1100": "#FFFFFFE8",
         "white-1200": "#E4E4FA",
         "white-t-1200": "#E4E4FA91",
         divider: "#91A0CE27",
         "selected-pr-1": "#051955",
+        orange: "#F57D50",
       },
       fontSize: {
         landingText: [

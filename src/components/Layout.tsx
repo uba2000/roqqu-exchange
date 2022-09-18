@@ -62,11 +62,14 @@ const Layout = () => {
               <Link to="/transfer">Transfer</Link>
             </div>
             <div className="space-x-7 flex">
-              <img
-                src={ASSETS.icon.bell}
-                className="w-[25px]"
-                alt="notification"
-              />
+              <div className="relative">
+                <img
+                  src={ASSETS.icon.bell}
+                  className="w-[25px]"
+                  alt="notification"
+                />
+                <div className="w-2 h-2 rounded-full bg-orange absolute right-0 top-0"></div>
+              </div>
               <div className="bg-[#101E48] w-[52px] h-[52px] rounded-full grid place-content-center"></div>
             </div>
           </div>

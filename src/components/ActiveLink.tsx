@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import useRouter from "../hooks/useRouter";
 
 type ActiveLinkProps = {
   href: string;
@@ -8,11 +9,14 @@ type ActiveLinkProps = {
 };
 
 const ActiveLink = ({ href, children, className = "" }: ActiveLinkProps) => {
-  const [path] = useState<string>(window.location.pathname);
+  const router = useRouter();
+  // const [path] = useState<string>(window.location.pathname);
   return (
     <Link
       to={href}
-      className={`${path === href ? "bg-hover-background" : ""} ${className}`}
+      className={`${
+        router.pathname === href ? "bg-hover-background" : ""
+      } ${className}`}
     >
       {children}
     </Link>
