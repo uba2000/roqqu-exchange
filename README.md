@@ -1,3 +1,5 @@
+<img src="https://github.com/uba2000/roqqu-exchange/blob/main/public/logo_white.png" alt="Roqqu" width="300" />
+
 # Roqqu Exchange
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
