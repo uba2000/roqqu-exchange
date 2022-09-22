@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
-import { createChart, CrosshairMode } from "lightweight-charts";
+import { createChart, CrosshairMode, Time } from "lightweight-charts";
 
-const Chart = () => {
-  // const [renderChart, setRenderChart] = useState<boolean>(true);
+interface IChart {
+  symbol?: string;
+  interval?: string;
+}
+
+const Chart = ({ symbol = "btcusdt", interval = "15m" }: IChart) => {
   useEffect(() => {
-    // if (renderChart) {
-    // }
     init();
   }, []);
 
@@ -32,9 +34,6 @@ const Chart = () => {
       crosshair: {
         mode: CrosshairMode.Normal,
       },
-      // priceScale: {
-      //   borderColor: "#485c7b",
-      // },
       timeScale: {
         borderColor: "#485158",
       },
@@ -55,67 +54,7 @@ const Chart = () => {
       wickUpColor: "#838ca1",
     });
 
-    // const volumeSeries = chart.addHistogramSeries({
-    //   color: "#385263",
-    //   // lineWidth: 2,
-    //   priceFormat: {
-    //     type: "volume",
-    //   },
-    //   // overlay: true,
-    //   scaleMargins: {
-    //     top: 0.9,
-    //     bottom: 0,
-    //   },
-    // });
-
-    const nextBar: any = () => {
-      if (!nextBar.date) nextBar.date = new Date(2020, 0, 0);
-      if (!nextBar.bar)
-        nextBar.bar = { open: 100, high: 104, low: 98, close: 103 };
-
-      nextBar.date.setDate(nextBar.date.getDate() + 1);
-      nextBar.bar.time = {
-        year: nextBar.date.getFullYear(),
-        month: nextBar.date.getMonth() + 1,
-        day: nextBar.date.getDate(),
-      };
-
-      let old_price = nextBar.bar.close;
-      let volatility = 0.1;
-      let rnd = Math.random();
-      let change_percent = 2 * volatility * rnd;
-
-      if (change_percent > volatility) change_percent -= 2 * volatility;
-
-      let change_amount = old_price * change_percent;
-      nextBar.bar.open = nextBar.bar.close;
-      nextBar.bar.close = old_price + change_amount;
-      nextBar.bar.high =
-        Math.max(nextBar.bar.open, nextBar.bar.close) +
-        Math.abs(change_amount) * Math.random();
-      nextBar.bar.low =
-        Math.min(nextBar.bar.open, nextBar.bar.close) -
-        Math.abs(change_amount) * Math.random();
-      nextBar.bar.value = Math.random() * 100;
-      nextBar.bar.color =
-        nextBar.bar.close < nextBar.bar.open ? "#B82C0D" : "#8CC176";
-
-      return nextBar.bar;
-    };
-
-    for (let i = 0; i < 150; i++) {
-      const bar = nextBar();
-      candleSeries.update(bar);
-      // volumeSeries.update(bar);
-    }
-
     resize();
-
-    setInterval(() => {
-      const bar = nextBar();
-      candleSeries.update(bar);
-      // volumeSeries.update(bar);
-    }, 3000);
 
     window.addEventListener("resize", resize, false);
 
@@ -129,8 +68,30 @@ const Chart = () => {
       setTimeout(() => chart.timeScale().fitContent(), 0);
     }
 
-    // setRenderChart(false);
+    // get history...
+    // use stored history...
+
+    var binanceSocket = new WebSocket(
+      `wss://stream.binance.com:9443/ws/${symbol}@kline_${interval}`
+    );
+
+    binanceSocket.onmessage = function (event) {
+      var message = JSON.parse(event.data);
+
+      var candlestick = message.k;
+
+      // console.log(candlestick);
+      candleSeries.update({
+        time: (candlestick.t / 1000) as Time,
+        open: candlestick.o,
+        high: candlestick.h,
+        low: candlestick.l,
+        close: candlestick.c,
+      });
+      // save to history...
+    };
   }, []);
+
   return <div id="chart1" className="w-full h-full overflow-hidden"></div>;
 };
 

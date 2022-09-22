@@ -1,9 +1,55 @@
-import React from "react";
+import React, { Fragment, useRef, useState } from "react";
+import { orderBy } from "lodash";
 
 import Chart from "../components/Chart";
 import Assets from "../utils/assets";
+import { format } from "date-fns";
+
+interface ITrade {
+  e: string;
+  E: number;
+  s: string;
+  t: number;
+  p: string;
+  q: string;
+  b: number;
+  a: number;
+  T: number;
+  m: boolean;
+  M: boolean;
+}
+
+const tradeSocket = new WebSocket(
+  "wss://stream.binance.com:9443/ws/btcusdt@trade"
+);
 
 const Pair = () => {
+  const tradesDiv = useRef<HTMLDivElement>(null);
+  const [trades, setTrades] = useState<Partial<ITrade>[]>([]);
+
+  tradeSocket.onmessage = function (event) {
+    let newTrade: ITrade = JSON.parse(event.data);
+    // let allTrades: Partial<ITrade>[] = trades;
+    // tradesDiv.current?.appendChild(
+    //   React.createElement(
+    //     TradesItem,
+    //     {
+    //       amount: newTrade.q,
+    //       price: newTrade.p,
+    //     },
+    //     null
+    //   ) as unknown as Node
+    // );
+    st(newTrade);
+  };
+
+  const st = (ab: any) => {
+    // let allTrades = trades;
+    setTrades([{ ...ab }, ...trades]);
+    // allTrades.push(ab);
+    console.log(ab.T, trades);
+  };
+
   return (
     <>
       <div className="pt-[18px] container top-0 z-50 sticky">
@@ -66,7 +112,7 @@ const Pair = () => {
                 <div className="flex justify-between">
                   <div className="space-x-5">
                     <div className="flex space-x-[6px]">
-                      <ChartOptions>4h</ChartOptions>
+                      <ChartOptions>15m</ChartOptions>
                       <ChartOptions>C</ChartOptions>
                       <ChartOptions>S</ChartOptions>
                       <ChartOptions>CH</ChartOptions>
@@ -119,7 +165,7 @@ const Pair = () => {
               </div>
               <div className="px-[6px] w-full h-[335px]">
                 {/* Chart */}
-                <Chart />
+                {/* <Chart /> */}
               </div>
             </div>
           </div>
@@ -174,29 +220,21 @@ const Pair = () => {
                       <div className="flex-1">AMOUNT(BTC)</div>
                       <div className="flex-1">TOTAL (USDT)</div>
                     </div>
-                    <div className="h-[300px] overflow-y-auto scrollbar-hide">
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
-                      <TradesItem type="p" />
-                      <TradesItem />
-                      <TradesItem type="p" />
+                    <div
+                      className="h-[300px] overflow-y-auto scrollbar-hide"
+                      ref={tradesDiv}
+                    >
+                      {trades.map((trade: Partial<ITrade>, idx: number) => (
+                        <Fragment key={idx}>
+                          <TradesItem
+                            time={trade.T}
+                            type={trade.m ? "p" : "n"}
+                            amount={trade.q}
+                            price={trade.p}
+                            total={trade.q}
+                          />
+                        </Fragment>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -298,7 +336,8 @@ const ChartOptions = ({ children }: ChartOptionsType) => {
 };
 
 interface ITradesItemType extends IOrderItemType {
-  time?: string;
+  time?: number | Date;
+  prev?: number;
 }
 
 const TradesItem = ({
@@ -306,18 +345,22 @@ const TradesItem = ({
   amount = "18372.99999",
   total = "18372.99999",
   progress = 31,
+  prev,
   type = "n",
-  time = "18:02:18",
+  time = 0,
 }: ITradesItemType) => {
   return (
     <div className="relative px-2 h-6 flex items-center overflow-x-hidden">
       <div className="flex w-full text-xs space-x-1">
-        <div className="text-inherit flex-1">{time}</div>
+        <div className="text-inherit flex-1">{format(time, "hh:mm:ss")}</div>
         <div
           className={`text-${type === "n" ? "negative" : "positive"} flex-1`}
         >
-          {type === "n" ? "317" : "47817"}
-          <span className="text-white-t-1200">.70</span>
+          {price.split(".")[0]}
+          <span className="text-white-t-1200">
+            .{price.split(".")[1][0]}
+            {price.split(".")[1][1]}
+          </span>
         </div>
         <div className="text-white flex-1">{amount}</div>
         <div className="text-white flex-1">{total}</div>
