@@ -48,8 +48,8 @@ const Pair = () => {
         </div>
       </div>
       <div className="container mt-[27px] mb-4 space-y-3">
-        <div className="grid gap-x-[13px] grid-cols-[auto_339px]">
-          <div>
+        <div className="flex space-x-[13px]">
+          <div className="flex-grow">
             <div className="bg-background-1 py-[13px] space-y-4 rounded-t-[10px]">
               <div className="pl-[30px] space-y-4 pr-4">
                 <div className="flex justify-between items-end">
@@ -117,13 +117,13 @@ const Pair = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-[6px]">
+              <div className="px-[6px] w-full h-[335px]">
                 {/* Chart */}
                 <Chart />
               </div>
             </div>
           </div>
-          <div>
+          <div className="basis-[339px] min-w-[339px] max-w-[339px]">
             <div className="bg-background-1 pb-2 pt-[26px] space-y-5 rounded-[5px]">
               <div className="px-[22px]">
                 <h5 className="text-white-1100">Order Book</h5>
