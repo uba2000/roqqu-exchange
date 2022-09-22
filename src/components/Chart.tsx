@@ -9,7 +9,7 @@ interface IChart {
   interval?: string;
 }
 
-const Chart = ({ symbol = "btcusdt", interval = "15m" }: IChart) => {
+const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
   useEffect(() => {
     init();
   }, []);
@@ -34,6 +34,9 @@ const Chart = ({ symbol = "btcusdt", interval = "15m" }: IChart) => {
       crosshair: {
         mode: CrosshairMode.Normal,
       },
+      // priceScale: {
+      //   borderColor: "#485c7b",
+      // },
       timeScale: {
         borderColor: "#485158",
       },
@@ -55,6 +58,12 @@ const Chart = ({ symbol = "btcusdt", interval = "15m" }: IChart) => {
     });
 
     resize();
+
+    // setInterval(() => {
+    //   const bar = nextBar();
+    //   candleSeries.update(bar);
+    //   // volumeSeries.update(bar);
+    // }, 3000);
 
     window.addEventListener("resize", resize, false);
 

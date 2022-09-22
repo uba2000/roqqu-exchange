@@ -1,5 +1,6 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { orderBy } from "lodash";
+import axios from "axios";
 
 import Chart from "../components/Chart";
 import Assets from "../utils/assets";
@@ -26,29 +27,34 @@ const tradeSocket = new WebSocket(
 const Pair = () => {
   const tradesDiv = useRef<HTMLDivElement>(null);
   const [trades, setTrades] = useState<Partial<ITrade>[]>([]);
+  const [orderBid, setOrderBid] = useState<Partial<ITrade>[]>([]);
+  const [orderAsk, setOrderAsk] = useState<Partial<ITrade>[]>([]);
+  const [tradesLoading, setTradesLoading] = useState<boolean>(true);
+  const [orderLoading, setOrderLoading] = useState<boolean>(true);
 
-  tradeSocket.onmessage = function (event) {
-    let newTrade: ITrade = JSON.parse(event.data);
-    // let allTrades: Partial<ITrade>[] = trades;
-    // tradesDiv.current?.appendChild(
-    //   React.createElement(
-    //     TradesItem,
-    //     {
-    //       amount: newTrade.q,
-    //       price: newTrade.p,
-    //     },
-    //     null
-    //   ) as unknown as Node
-    // );
-    st(newTrade);
+  tradeSocket.onmessage = async function (event) {
+    try {
+      if (!tradesLoading) setTradesLoading(false);
+      let newTrade: ITrade = JSON.parse(event.data);
+      st(newTrade);
+      const { data } = await axios.get(
+        "https://api.binance.com/api/v3/depth?limit=5&symbol=BTCUSDT"
+      );
+      if (data.bids && data.asks) setOrderLoading(false);
+      setOrderBid(data.bids);
+      setOrderAsk(data.asks);
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const st = (ab: any) => {
-    // let allTrades = trades;
     setTrades([{ ...ab }, ...trades]);
-    // allTrades.push(ab);
-    console.log(ab.T, trades);
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -165,7 +171,7 @@ const Pair = () => {
               </div>
               <div className="px-[6px] w-full h-[335px]">
                 {/* Chart */}
-                {/* <Chart /> */}
+                <Chart />
               </div>
             </div>
           </div>
@@ -183,21 +189,21 @@ const Pair = () => {
                   </div>
                   <div className="divide-y-[1px] divide-divider">
                     <div className="mb-6 text-negative">
-                      <OrderItem />
-                      <OrderItem progress={21} />
-                      <OrderItem progress={11} />
-                      <OrderItem progress={5} />
-                      <OrderItem progress={15} />
+                      {orderAsk.map((ask: any, idx: number) => (
+                        <Fragment key={idx}>
+                          <OrderItem amount={ask[1]} price={ask[0]} />
+                        </Fragment>
+                      ))}
                     </div>
                     <div className="py-[14px] grid place-content-center">
                       <span className="text-sm">128299.304781 USDT</span>
                     </div>
                     <div className="pt-4 text-positive">
-                      <OrderItem type="p" />
-                      <OrderItem type="p" progress={21} />
-                      <OrderItem type="p" progress={11} />
-                      <OrderItem type="p" progress={5} />
-                      <OrderItem type="p" progress={15} />
+                      {orderBid.map((bid: any, idx: number) => (
+                        <Fragment key={idx}>
+                          <OrderItem type="p" amount={bid[1]} price={bid[0]} />
+                        </Fragment>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -316,7 +322,10 @@ const OrderItem = ({
           type === "n" ? "bg-negative-t" : "bg-positive-t"
         } left-0 z-10`}
         style={{
-          transform: `translateX(${progress - 100}%)`,
+          transform: `translateX(${-(
+            ((parseFloat(amount) * parseFloat(price)) / parseFloat(price)) *
+            100
+          )}%)`,
         }}
       ></div>
     </div>
