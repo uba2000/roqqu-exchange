@@ -205,37 +205,27 @@ const Pair = () => {
                         <div className="flex-1 text-right">TOTAL (USDT)</div>
                       </div>
                       <div className="divide-y-[1px] divide-divider">
-                        {orderLoading ? (
-                          <div className="w-full h-[199px] flex items-center justify-center">
-                            <Loader />
-                          </div>
-                        ) : (
-                          <>
-                            <div className="mb-6 text-negative">
-                              {orderAsk.map((ask: any, idx: number) => (
-                                <Fragment key={idx}>
-                                  <OrderItem amount={ask[1]} price={ask[0]} />
-                                </Fragment>
-                              ))}
-                            </div>
-                            <div className="py-[14px] grid place-content-center">
-                              <span className="text-sm">
-                                128299.304781 USDT
-                              </span>
-                            </div>
-                            <div className="pt-4 text-positive">
-                              {orderBid.map((bid: any, idx: number) => (
-                                <Fragment key={idx}>
-                                  <OrderItem
-                                    type="p"
-                                    amount={bid[1]}
-                                    price={bid[0]}
-                                  />
-                                </Fragment>
-                              ))}
-                            </div>
-                          </>
-                        )}
+                        <div className="mb-6 text-negative">
+                          {orderAsk.map((ask: any, idx: number) => (
+                            <Fragment key={idx}>
+                              <OrderItem amount={ask[1]} price={ask[0]} />
+                            </Fragment>
+                          ))}
+                        </div>
+                        <div className="py-[14px] grid place-content-center">
+                          <span className="text-sm">128299.304781 USDT</span>
+                        </div>
+                        <div className="pt-4 text-positive">
+                          {orderBid.map((bid: any, idx: number) => (
+                            <Fragment key={idx}>
+                              <OrderItem
+                                type="p"
+                                amount={bid[1]}
+                                price={bid[0]}
+                              />
+                            </Fragment>
+                          ))}
+                        </div>
                       </div>
                     </>
                   )}
