@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 // import ReactDOM from "react-dom";
 import { createChart, CrosshairMode, Time } from "lightweight-charts";
 
@@ -10,6 +10,7 @@ interface IChart {
 }
 
 const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     init();
   }, []);
@@ -85,6 +86,7 @@ const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
     );
 
     binanceSocket.onmessage = function (event) {
+      if (loading) setLoading(false);
       var message = JSON.parse(event.data);
 
       var candlestick = message.k;
@@ -101,7 +103,11 @@ const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
     };
   }, []);
 
-  return <div id="chart1" className="w-full h-full overflow-hidden"></div>;
+  return (
+    <>
+      <div id="chart1" className="w-full h-full overflow-hidden"></div>
+    </>
+  );
 };
 
 export default Chart;

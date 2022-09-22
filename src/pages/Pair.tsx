@@ -1,10 +1,16 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import { orderBy } from "lodash";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import axios from "axios";
 
 import Chart from "../components/Chart";
 import Assets from "../utils/assets";
 import { format } from "date-fns";
+import Loader from "../components/Loader";
 
 interface ITrade {
   e: string;
@@ -33,21 +39,26 @@ const Pair = () => {
   const [orderLoading, setOrderLoading] = useState<boolean>(true);
 
   tradeSocket.onmessage = async function (event) {
+    if (tradesLoading) setTradesLoading(false);
+    let newTrade: ITrade = JSON.parse(event.data);
+    st(newTrade);
+    init();
+  };
+
+  const init = useCallback(async () => {
     try {
-      if (!tradesLoading) setTradesLoading(false);
-      let newTrade: ITrade = JSON.parse(event.data);
-      st(newTrade);
       const { data } = await axios.get(
         "https://api.binance.com/api/v3/depth?limit=5&symbol=BTCUSDT"
       );
-      if (data.bids && data.asks) setOrderLoading(false);
+      if (data.bids && data.asks && orderLoading) setOrderLoading(false);
       setOrderBid(data.bids);
       setOrderAsk(data.asks);
       // console.log(data);
     } catch (error) {
       console.log(error);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const st = (ab: any) => {
     setTrades([{ ...ab }, ...trades]);
@@ -182,30 +193,52 @@ const Pair = () => {
               </div>
               <div className="px-2">
                 <div className="bg-background-2 rounded-[5px] pb-6">
-                  <div className="mb-5 px-2 pt-4 flex space-x-1 items-center text-xs uppercase text-white-t-1200">
-                    <div className="flex-1">PRICE(USDT)</div>
-                    <div className="flex-1 text-center">AMOUNT(BTC)</div>
-                    <div className="flex-1 text-right">TOTAL (USDT)</div>
-                  </div>
-                  <div className="divide-y-[1px] divide-divider">
-                    <div className="mb-6 text-negative">
-                      {orderAsk.map((ask: any, idx: number) => (
-                        <Fragment key={idx}>
-                          <OrderItem amount={ask[1]} price={ask[0]} />
-                        </Fragment>
-                      ))}
+                  {orderLoading ? (
+                    <div className="w-full h-[199px] flex items-center justify-center">
+                      <Loader />
                     </div>
-                    <div className="py-[14px] grid place-content-center">
-                      <span className="text-sm">128299.304781 USDT</span>
-                    </div>
-                    <div className="pt-4 text-positive">
-                      {orderBid.map((bid: any, idx: number) => (
-                        <Fragment key={idx}>
-                          <OrderItem type="p" amount={bid[1]} price={bid[0]} />
-                        </Fragment>
-                      ))}
-                    </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="mb-5 px-2 pt-4 flex space-x-1 items-center text-xs uppercase text-white-t-1200">
+                        <div className="flex-1">PRICE(USDT)</div>
+                        <div className="flex-1 text-center">AMOUNT(BTC)</div>
+                        <div className="flex-1 text-right">TOTAL (USDT)</div>
+                      </div>
+                      <div className="divide-y-[1px] divide-divider">
+                        {orderLoading ? (
+                          <div className="w-full h-[199px] flex items-center justify-center">
+                            <Loader />
+                          </div>
+                        ) : (
+                          <>
+                            <div className="mb-6 text-negative">
+                              {orderAsk.map((ask: any, idx: number) => (
+                                <Fragment key={idx}>
+                                  <OrderItem amount={ask[1]} price={ask[0]} />
+                                </Fragment>
+                              ))}
+                            </div>
+                            <div className="py-[14px] grid place-content-center">
+                              <span className="text-sm">
+                                128299.304781 USDT
+                              </span>
+                            </div>
+                            <div className="pt-4 text-positive">
+                              {orderBid.map((bid: any, idx: number) => (
+                                <Fragment key={idx}>
+                                  <OrderItem
+                                    type="p"
+                                    amount={bid[1]}
+                                    price={bid[0]}
+                                  />
+                                </Fragment>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

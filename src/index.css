@@ -52,3 +52,56 @@ body {
 .blue {
   @apply py-[10px] px-6 bg-blue-1500;
 }
+
+@-webkit-keyframes scaling-dots {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40%,
+  60% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes scaling-dots {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40%,
+  60% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.scaling-dots {
+  display: grid;
+  height: 10px;
+  grid-gap: 5px;
+  grid-template-columns: repeat(4, 10px);
+}
+.scaling-dots div {
+  -webkit-animation: scaling-dots 1s infinite ease backwards;
+  animation: scaling-dots 1s infinite ease backwards;
+  @apply bg-primary w-[10px] h-[10px] rounded-full;
+}
+.scaling-dots div:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+.scaling-dots div:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+.scaling-dots div:nth-child(3) {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.scaling-dots div:nth-child(4) {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
