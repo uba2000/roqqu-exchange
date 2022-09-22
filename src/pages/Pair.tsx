@@ -253,28 +253,36 @@ const Pair = () => {
                 </div>
                 <div className="pl-2 pr-[13px]">
                   <div className="bg-background-2 rounded-[5px] pt-[13px] px-6">
-                    <div className="mb-5 px-2 pt-4 flex space-x-1 items-center text-xs uppercase text-white-t-1200">
-                      <div className="flex-1">Time</div>
-                      <div className="flex-1">PRICE(USDT)</div>
-                      <div className="flex-1">AMOUNT(BTC)</div>
-                      <div className="flex-1">TOTAL (USDT)</div>
-                    </div>
-                    <div
-                      className="h-[300px] overflow-y-auto scrollbar-hide"
-                      ref={tradesDiv}
-                    >
-                      {trades.map((trade: Partial<ITrade>, idx: number) => (
-                        <Fragment key={idx}>
-                          <TradesItem
-                            time={trade.T}
-                            type={trade.m ? "p" : "n"}
-                            amount={trade.q}
-                            price={trade.p}
-                            total={trade.q}
-                          />
-                        </Fragment>
-                      ))}
-                    </div>
+                    {tradesLoading ? (
+                      <div className="w-full h-[199px] flex items-center justify-center">
+                        <Loader />
+                      </div>
+                    ) : (
+                      <>
+                        <div className="mb-5 px-2 pt-4 flex space-x-1 items-center text-xs uppercase text-white-t-1200">
+                          <div className="flex-1">Time</div>
+                          <div className="flex-1">PRICE(USDT)</div>
+                          <div className="flex-1">AMOUNT(BTC)</div>
+                          <div className="flex-1">TOTAL (USDT)</div>
+                        </div>
+                        <div
+                          className="h-[300px] overflow-y-auto scrollbar-hide"
+                          ref={tradesDiv}
+                        >
+                          {trades.map((trade: Partial<ITrade>, idx: number) => (
+                            <Fragment key={idx}>
+                              <TradesItem
+                                time={trade.T}
+                                type={trade.m ? "p" : "n"}
+                                amount={trade.q}
+                                price={trade.p}
+                                total={trade.q}
+                              />
+                            </Fragment>
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

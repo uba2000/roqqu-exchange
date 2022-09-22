@@ -3,6 +3,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 // import ReactDOM from "react-dom";
 import { createChart, CrosshairMode, Time } from "lightweight-charts";
+import Loader from "./Loader";
 
 interface IChart {
   symbol?: string;
@@ -105,7 +106,15 @@ const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
 
   return (
     <>
-      <div id="chart1" className="w-full h-full overflow-hidden"></div>
+      {loading ? (
+        <>
+          <div className="w-full h-[309px] flex items-center justify-center">
+            <Loader />
+          </div>
+        </>
+      ) : (
+        <div id="chart1" className="w-full h-full overflow-hidden"></div>
+      )}
     </>
   );
 };
