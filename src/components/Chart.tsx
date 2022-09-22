@@ -18,8 +18,8 @@ const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
   const init = useCallback(() => {
     const chartHtml = document.getElementById("chart1");
     const chart = createChart(chartHtml as HTMLElement, {
-      width: chartHtml?.parentElement?.offsetWidth,
-      height: chartHtml?.parentElement?.offsetHeight,
+      width: 0,
+      height: 0,
       layout: {
         backgroundColor: "#04091C",
         textColor: "#AFAFB4E8",
@@ -71,8 +71,8 @@ const Chart = ({ symbol = "btcusdt", interval = "1m" }: IChart) => {
     function resize() {
       console.log(chartHtml?.parentElement?.offsetWidth);
       chart.applyOptions({
-        width: chartHtml?.parentElement?.offsetWidth,
-        height: chartHtml?.parentElement?.offsetHeight,
+        width: 0,
+        height: 0,
       });
 
       setTimeout(() => chart.timeScale().fitContent(), 0);
