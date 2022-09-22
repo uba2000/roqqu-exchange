@@ -118,7 +118,7 @@ const Pair = () => {
                 <div className="flex justify-between">
                   <div className="space-x-5">
                     <div className="flex space-x-[6px]">
-                      <ChartOptions>15m</ChartOptions>
+                      <ChartOptions>1m</ChartOptions>
                       <ChartOptions>C</ChartOptions>
                       <ChartOptions>S</ChartOptions>
                       <ChartOptions>CH</ChartOptions>
